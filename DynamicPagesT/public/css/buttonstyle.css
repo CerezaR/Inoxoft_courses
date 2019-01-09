@@ -1,0 +1,16 @@
+.button_link {
+    background: none;
+    color: dodgerblue;
+    border: none;
+    padding: 0;
+    font: inherit;
+    /*border is optional*/
+    border-bottom: 1px solid dodgerblue;
+    cursor: pointer;
+}
+
+.button_link:disabled {
+    color: silver;
+    border-bottom: 1px solid silver;
+    cursor: not-allowed;
+}
