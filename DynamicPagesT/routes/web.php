@@ -11,28 +11,41 @@
 |
 */
 
-Route::get('/', 'PageController@read');
+/*require 'admin\page\page_add.php';
+require 'admin\page\page_delete.php';
+require 'admin\page\page_edit.php';
+require 'admin\page\page_index.php';
+require 'admin\page\page_save.php';
+require 'admin\page\page_show.php';
+require 'admin\page\page_update.php';
+require 'user\page\page_read.php';*/
+
+Route::get('/', 'User\Page\ReadController@execute');
 
 Auth::routes();
 
-Route::get('/home', 'PageController@read');
+Route::get('/home', 'User\Page\ReadController@execute');
 
-Route::get('/admin', 'AdminController@index');
+Route::middleware('auth', 'role:ROLE_ADMIN')->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/', 'Admin\Page\IndexController@execute');
 
-Route::get('/admin/add', 'AdminController@create');
+        Route::get('/add', 'Admin\Page\CreateController@execute');
 
-Route::get('/admin/show', 'AdminController@read');
+        Route::get('/show', 'Admin\Page\ReadController@execute');
 
-Route::post('/admin/save', 'AdminController@save');
+        Route::post('/save', 'Admin\Page\SaveController@execute');
 
-Route::patch('/admin/update/{id}', 'AdminController@update');
+        Route::patch('/update/{id}', 'Admin\Page\UpdateController@execute');
 
-Route::get('{page}', function ($slug){
+        Route::get('/edit/{id}', 'Admin\Page\EditController@execute');
+
+        Route::get('/delete/{id}', 'Admin\Page\DeleteController@execute');
+    });
+});
+
+Route::get('{page}', function ($slug) {
     $page = \App\Page::findBySlug($slug);
 
     return view('default-page', compact('page'));
 });
-
-Route::get('/admin/edit/{id}', 'AdminController@edit');
-
-Route::get('/admin/delete/{id}', 'AdminController@delete');

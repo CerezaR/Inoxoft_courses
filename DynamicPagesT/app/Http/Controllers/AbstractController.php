@@ -6,13 +6,12 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Zend\Diactoros\Request;
 
 /**
  * Class Controller
  * @package App\Http\Controllers
  */
-interface Controller
+abstract class AbstractController extends BaseController
 {
-    public function execute();
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

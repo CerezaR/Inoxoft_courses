@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\Page;
 
+use App\Http\Controllers\AbstractController;
+use App\Http\Controllers\Controller;
 use App\Page;
 
-/**
- * Class PageController
- * @package App\Http\Controllers
- */
-class PageController extends Controller
+class ReadController extends AbstractController implements Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function read() {
+    public function execute()
+    {
         $pages = Page::all()->toArray();
         usort($pages, array($this, 'myComparator'));
         return view('home', compact('pages'));
     }
 
     /**
-     * @param Page $a
-     * @param Page $b
+     * @param array $a
+     * @param array $b
      * @return mixed
      */
-    function myComparator($a, $b) {
+    private function myComparator(Array $a, Array $b)
+    {
         return $a['position'] - $b['position'];
     }
 }

@@ -88,12 +88,15 @@
                 <button type="submit" class="link">Submit Page</button>
             </div>
         </div>
+
         <div class="form-group row">
             <div class="offset-sm-3 col-sm-9">
                 <p><a class="link" href="http://<?php echo $_SERVER['SERVER_NAME'] . ':' .  $_SERVER['SERVER_PORT'] ?>/admin">Admin dashboard</a></p>
             </div>
         </div>
+
     </form>
+
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script>tinymce.init({ selector:'textarea' });</script>
 @endsection
